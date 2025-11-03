@@ -1,3 +1,4 @@
+#[cfg(target_arch = "x86_64")]
 use std::{
     arch::x86_64::*,
     ops::{BitAnd, BitOr, BitOrAssign},
@@ -5,14 +6,17 @@ use std::{
 
 use super::{Mask, Simd};
 
+#[cfg(target_arch = "x86_64")]
 #[derive(Debug)]
 #[repr(transparent)]
 pub struct Simd128i(__m128i);
 
+#[cfg(target_arch = "x86_64")]
 #[derive(Debug)]
 #[repr(transparent)]
 pub struct Simd128u(__m128i);
 
+#[cfg(target_arch = "x86_64")]
 impl Simd for Simd128i {
     const LANES: usize = 16;
     type Mask = Mask128;
@@ -51,10 +55,12 @@ impl Simd for Simd128i {
     }
 }
 
+#[cfg(target_arch = "x86_64")]
 #[derive(Debug)]
 #[repr(transparent)]
 pub struct Mask128(__m128i);
 
+#[cfg(target_arch = "x86_64")]
 impl Mask for Mask128 {
     type BitMask = u16;
     type Element = u8;
@@ -71,6 +77,7 @@ impl Mask for Mask128 {
     }
 }
 
+#[cfg(target_arch = "x86_64")]
 impl BitAnd<Mask128> for Mask128 {
     type Output = Self;
 
@@ -80,6 +87,7 @@ impl BitAnd<Mask128> for Mask128 {
     }
 }
 
+#[cfg(target_arch = "x86_64")]
 impl BitOr<Mask128> for Mask128 {
     type Output = Self;
 
@@ -89,6 +97,7 @@ impl BitOr<Mask128> for Mask128 {
     }
 }
 
+#[cfg(target_arch = "x86_64")]
 impl BitOrAssign<Mask128> for Mask128 {
     #[inline(always)]
     fn bitor_assign(&mut self, rhs: Mask128) {
@@ -96,6 +105,7 @@ impl BitOrAssign<Mask128> for Mask128 {
     }
 }
 
+#[cfg(target_arch = "x86_64")]
 impl Simd for Simd128u {
     const LANES: usize = 16;
     type Mask = Mask128;
